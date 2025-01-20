@@ -1,0 +1,21 @@
+FROM python:3.11
+
+RUN apt update && apt install nginx -y
+COPY deploy/nginx/default /etc/nginx/sites-enabled/
+
+RUN apt-get install libmagic1
+
+# Needs to be [standard] to reload with watchfiles
+RUN pip install --no-cache-dir uvicorn[standard]
+
+WORKDIR /app
+
+COPY app/ .
+
+RUN pip install --no-cache-dir -r requirements.txt
+RUN mkdir -p /app/database
+RUN chown -R root:root /app/database
+
+EXPOSE 80
+
+CMD ["/bin/bash", "/app/entry_dev.sh"]

